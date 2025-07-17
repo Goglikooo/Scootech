@@ -5,18 +5,39 @@ export default function AboutUs() {
   const [method, setMethod] = useState<"minutes" | "kilometers">("minutes");
   const [value, setValue] = useState("");
   const [price, setPrice] = useState<number | null>(null);
+  const [openRide, setOpenRide] = useState(false);
+
+  const unlockFee = 1; // Fixed unlock fee for all rides
 
   const calculatePrice = () => {
     if (method === "minutes") {
-      setPrice(parseFloat(value) * 0.25);
+      setPrice(parseFloat(value) * 0.25 + unlockFee);
     } else {
-      setPrice(parseFloat(value) * 0.75);
+      setPrice(parseFloat(value) * 0.75 + unlockFee);
     }
   };
 
   return (
     <div className="h-screen bg-white  place-content-center">
       <section className="relative  py-20 px-8   ">
+        <div className="h-150  w-full flex justify-center">
+          <div className="flex flex-col items-center justify-start h-full w-150 border-solid border-gray-300 rounded-lg shadow-lg p-6  bg-linear-to-r from-cyan-500 to-blue-500">
+            <img
+              src={Logo}
+              alt="Scooteq Logo"
+              className="h-40 w-auto object-contain mt-10 animate-bounce"
+            />
+            <h3 className="text-lime-300 text-5xl font-bold mt-auto">2.45 €</h3>
+            <h1 className="text-5xl font-bold  text-white mt-auto">00:01:43</h1>
+            <button
+              type="button"
+              className="w-100  text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 mt-auto"
+            >
+              End Ride
+            </button>
+          </div>
+        </div>
+
         <div className="absolute inset-0 w-full h-full -z-10">
           <svg
             className="w-full h-full"
@@ -95,18 +116,26 @@ export default function AboutUs() {
             <button
               onClick={() => {
                 calculatePrice();
-                console.log("goga");
               }}
               className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
             >
               Calculate Price
             </button>
 
-            {price !== null && (
-              <div className="mt-6 text-lg font-medium text-green-600">
-                Total Price: €{price.toFixed(2)}
-              </div>
-            )}
+            <div className="h-16 mt-6 w-full ">
+              {price !== null && (
+                <h1 className="mt-6 text-lg font-medium text-green-600">
+                  Total Price: €{price.toFixed(2)}
+                </h1>
+              )}
+            </div>
+            <div className="w-full h-16 ">
+              {price !== null && (
+                <button className=" w-full focus:outline-none text-white bg-blue-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-purple-700 dark:focus:ring-blue-900">
+                  Start Ride
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </section>
