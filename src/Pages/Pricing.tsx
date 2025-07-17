@@ -2,33 +2,31 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 
 const tiers = [
   {
-    name: "Hobby",
-    id: "tier-hobby",
+    name: "Per Kilometer",
+    id: "tier-km",
     href: "#",
-    priceMonthly: "$29",
-    description:
-      "The perfect plan if you're just getting started with our product.",
+    price: "€0.75",
+    description: "Best for long-distance rides with steady speed.",
     features: [
-      "25 products",
-      "Up to 10,000 subscribers",
-      "Advanced analytics",
-      "24-hour support response time",
+      "Distance-based cost control",
+      "No time pressure",
+      "Perfect for open areas",
+      "More savings on fast routes",
     ],
     featured: false,
   },
   {
-    name: "Enterprise",
-    id: "tier-enterprise",
+    name: "per Minute",
+    id: "tier-min",
     href: "#",
-    priceMonthly: "$99",
-    description: "Dedicated support and infrastructure for your company.",
+    price: "€0.25",
+    description: "Ideal for short rides and flexible city travel.",
     features: [
-      "Unlimited products",
-      "Unlimited subscribers",
-      "Advanced analytics",
-      "Dedicated support representative",
-      "Marketing automations",
-      "Custom integrations",
+      "Pay-as-you-go usage",
+      "No distance limit",
+      "Fair pricing in traffic",
+      "Great for urban commuters",
+      "Real-time usage tracking",
     ],
     featured: true,
   },
@@ -40,7 +38,7 @@ function classNames(...classes: any) {
 
 export default function Example() {
   return (
-    <div className="relative isolate bg-white px-5 py-2 sm:py-5 lg:px-5">
+    <div className="relative isolate bg-white px-5 py-2 sm:py-5 lg:px-5 mt-20">
       <div
         aria-hidden="true"
         className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl"
@@ -91,7 +89,7 @@ export default function Example() {
                   "text-5xl font-semibold tracking-tight"
                 )}
               >
-                {tier.priceMonthly}
+                {tier.price}
               </span>
               <span
                 className={classNames(
@@ -99,7 +97,7 @@ export default function Example() {
                   "text-base"
                 )}
               >
-                /month
+                /{tier.name}
               </span>
             </p>
             <p

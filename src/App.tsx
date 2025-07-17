@@ -1,15 +1,27 @@
 import "./App.css";
 import LandingPage from "./Pages/LandingPage";
 import Pricing from "./Pages/Pricing";
+import AboutUs from "./Pages/AboutUs";
+import Rent from "./Pages/Rent";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Pages/Navbar";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/pricing" element={<Pricing />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/rent" element={<Rent />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
 }

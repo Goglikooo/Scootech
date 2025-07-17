@@ -1,0 +1,115 @@
+import { useState } from "react";
+import Logo from "../assets/logo.png";
+
+export default function AboutUs() {
+  const [method, setMethod] = useState<"minutes" | "kilometers">("minutes");
+  const [value, setValue] = useState("");
+  const [price, setPrice] = useState<number | null>(null);
+
+  const calculatePrice = () => {
+    if (method === "minutes") {
+      setPrice(parseFloat(value) * 0.25);
+    } else {
+      setPrice(parseFloat(value) * 0.75);
+    }
+  };
+
+  return (
+    <div className="h-screen bg-white  place-content-center">
+      <section className="relative  py-20 px-8   ">
+        <div className="absolute inset-0 w-full h-full -z-10">
+          <svg
+            className="w-full h-full"
+            viewBox="0 0 1440 800"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <pattern
+                id="dots"
+                patternUnits="userSpaceOnUse"
+                width="40"
+                height="40"
+                patternTransform="rotate(45)"
+              >
+                <circle cx="10" cy="10" r="2" fill="#3B82F6" opacity="0.1" />
+              </pattern>
+            </defs>
+            <rect width="1440" height="800" fill="url(#dots)" />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-20 grid md:grid-cols-2 gap-12 items-center">
+          <div className="relative p-4">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-blue-400 to-green-400 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300"></div>
+            <img
+              src={Logo}
+              alt="About Us"
+              className="relative rounded-xl  object-cover w-full h-full hover:opacity-90 transition-opacity duration-300"
+            />
+          </div>
+          <div className="max-w-xl mx-auto p-6">
+            <h1 className="text-2xl font-semibold mb-4">
+              Calculate Your Ride Cost
+            </h1>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2">
+                Choose pricing method:
+              </label>
+              <div className="flex gap-4">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    value="minutes"
+                    checked={method === "minutes"}
+                    onChange={() => setMethod("minutes")}
+                  />
+                  Per Minute
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    value="kilometers"
+                    checked={method === "kilometers"}
+                    onChange={() => setMethod("kilometers")}
+                  />
+                  Per Kilometer
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2">
+                Enter {method === "minutes" ? "minutes" : "distance (km)"}:
+              </label>
+              <input
+                type="number"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
+                placeholder={`Enter ${method === "minutes" ? "minutes" : "km"}`}
+              />
+            </div>
+
+            <button
+              onClick={() => {
+                calculatePrice();
+                console.log("goga");
+              }}
+              className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              Calculate Price
+            </button>
+
+            {price !== null && (
+              <div className="mt-6 text-lg font-medium text-green-600">
+                Total Price: €{price.toFixed(2)}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
