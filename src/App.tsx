@@ -6,6 +6,7 @@ import Rent from "./Pages/Rent";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Pages/Navbar";
+import ContactPage from "./Pages/ContactPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/rent" element={<Rent />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
       </div>

@@ -4,7 +4,7 @@ const tiers = [
   {
     name: "Per Kilometer",
     id: "tier-km",
-    href: "#",
+    href: "/rent",
     price: "€0.75",
     description: "Best for long-distance rides with steady speed.",
     features: [
@@ -18,7 +18,7 @@ const tiers = [
   {
     name: "per Minute",
     id: "tier-min",
-    href: "#",
+    href: "/rent",
     price: "€0.25",
     description: "Ideal for short rides and flexible city travel.",
     features: [

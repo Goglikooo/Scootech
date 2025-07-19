@@ -6,7 +6,7 @@ const navigation = [
   { name: "Rent", href: "/rent" },
   { name: "Pricing", href: "/pricing" },
   { name: "About Us", href: "/about" },
-  { name: "Contact", href: "#" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Example() {
@@ -52,7 +52,7 @@ export default function Example() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
+            Start Ride <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>
@@ -96,12 +96,7 @@ export default function Example() {
                 ))}
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+                {/* <div onClick={() => setOpenRide(true)}>Ride</div> */}
               </div>
             </div>
           </div>
