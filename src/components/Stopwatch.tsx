@@ -13,7 +13,8 @@ export default function Stopwatch({
   const [time, setTime] = useState<number>(0); // stores the time difference
 
   const [isRunning, setIsRunning] = useState(false);
-  const [openPay, setOpenPay] = useState(false); // state to control payment
+  const [openPay, setOpenPay] = useState(false);
+  const [paymentNeed, setPaymentNeed] = useState(false); // state to control payment
   const startingFee = 1.0; // Fixed unlock fee for all rides
   const perSecondRate = 0.25 / 60; // 0.25€ per minute, so per second it's 0.25/60
 
@@ -58,7 +59,7 @@ export default function Stopwatch({
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-full relative">
-      {/* banner start */}
+      {/* banners start */}
 
       {openBanner && (
         <div
@@ -81,6 +82,27 @@ export default function Stopwatch({
         </div>
       )}
 
+      {paymentNeed && (
+        <div
+          className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+          role="alert"
+        >
+          <svg
+            className="shrink-0 inline w-4 h-4 me-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span className="sr-only">Info</span>
+          <div>
+            <span className="font-medium">You have not paid yet!</span>
+          </div>
+        </div>
+      )}
+
       {/* banner end  */}
       {!isRunning && (
         <svg
@@ -90,7 +112,9 @@ export default function Stopwatch({
           viewBox="0 0 24 24"
           stroke="currentColor"
           aria-hidden="true"
-          onClick={() => setOpenRide(false)}
+          onClick={() => {
+            openBanner ? setOpenRide(false) : setPaymentNeed(true);
+          }}
         >
           <path
             stroke-linecap="round"
@@ -140,6 +164,7 @@ export default function Stopwatch({
 
             setOpenPay(false);
             setOpenBanner(true);
+            setPaymentNeed(false);
             console.log("Payment initiated", { totalCost, time }); // Here you can handle the payment logic
             console.log({ hours }); // Here you can handle the payment logic
           }

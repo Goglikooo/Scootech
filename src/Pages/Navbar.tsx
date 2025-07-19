@@ -9,7 +9,11 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ];
 
-export default function Example() {
+interface Props {
+  setOpenRide: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function NavBar({ setOpenRide }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -51,9 +55,7 @@ export default function Example() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Start Ride <span aria-hidden="true">&rarr;</span>
-          </a>
+          <button onClick={() => setOpenRide(true)}>Start Ride</button>
         </div>
       </nav>
       <Dialog

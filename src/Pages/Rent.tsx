@@ -3,11 +3,16 @@ import Logo from "../assets/logo.png";
 
 import Stopwatch from "../components/stopwatch";
 
-export default function AboutUs() {
+interface Props {
+  setOpenRide: React.Dispatch<React.SetStateAction<boolean>>;
+  openRide: boolean;
+}
+
+export default function AboutUs({ setOpenRide, openRide }: Props) {
   const [method, setMethod] = useState<"minutes" | "kilometers">("minutes");
   const [value, setValue] = useState("");
   const [price, setPrice] = useState<number | null>(null);
-  const [openRide, setOpenRide] = useState(false);
+  // const [openRide, setOpenRide] = useState(false);
   const unlockFee = 1; // Fixed unlock fee for all rides
 
   const calculatePrice = () => {
