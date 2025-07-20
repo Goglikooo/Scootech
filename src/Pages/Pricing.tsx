@@ -1,42 +1,77 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { useState, useEffect } from "react";
 
-const tiers = [
-  {
-    name: "Per Kilometer",
-    id: "tier-km",
-    href: "/rent",
-    price: "€0.75",
-    description: "Best for long-distance rides with steady speed.",
-    features: [
-      "Distance-based cost control",
-      "No time pressure",
-      "Perfect for open areas",
-      "More savings on fast routes",
-    ],
-    featured: false,
-  },
-  {
-    name: "per Minute",
-    id: "tier-min",
-    href: "/rent",
-    price: "€0.25",
-    description: "Ideal for short rides and flexible city travel.",
-    features: [
-      "Pay-as-you-go usage",
-      "No distance limit",
-      "Fair pricing in traffic",
-      "Great for urban commuters",
-      "Real-time usage tracking",
-    ],
-    featured: true,
-  },
-];
+interface PricingData {
+  startingFee: number;
+  price_per_km: number;
+  price_per_minute: number;
+}
+
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+  const [pricing, setPricing] = useState<PricingData>({
+    startingFee: 1.00,
+    price_per_km: 0.75,
+    price_per_minute: 0.25
+  });
+
+  useEffect(() => {
+    const fetchPricing = async () => {
+      try {
+        const response = await fetch('http://localhost/scootech/backend/api/scooters.php');
+        const data = await response.json();
+        if (data.scooters && data.scooters.length > 0) {
+          const scooter = data.scooters[0];
+          setPricing({
+            startingFee: Number(scooter.startingFee),
+            price_per_km: Number(scooter.price_per_km),
+            price_per_minute: Number(scooter.price_per_minute)
+          });
+        }
+      } catch (error) {
+        console.error('Error loading pricing:', error);
+      }
+    };
+    fetchPricing();
+  }, []);
+
+
+  const tiers = [
+    {
+      name: "Per Kilometer",
+      id: "tier-km",
+      href: "/rent",
+      price: `€${pricing.price_per_km}`,
+      description: "Best for long-distance rides with steady speed.",
+      features: [
+        "Distance-based cost control",
+        "No time pressure",
+        "Perfect for open areas",
+        "More savings on fast routes",
+      ],
+      featured: false,
+    },
+    {
+      name: "per Minute",
+      id: "tier-min",
+      href: "/rent",
+      price: `€${pricing.price_per_minute}`,
+      description: "Ideal for short rides and flexible city travel.",
+      features: [
+        "Pay-as-you-go usage",
+        "No distance limit",
+        "Fair pricing in traffic",
+        "Great for urban commuters",
+        "Real-time usage tracking",
+      ],
+      featured: true,
+    },
+  ];
+
   return (
     <div className="relative isolate bg-white px-5 py-2 sm:py-5 lg:px-5 mt-20">
       <div
